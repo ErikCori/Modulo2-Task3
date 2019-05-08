@@ -1,3 +1,16 @@
+var statistics = {
+        number_of_democrats: 0,
+        number_of_republicans: 0,
+        number_of_independents: 0,
+        total: 0,
+        democrats_average_votes_with_party: 0,
+        republicans_average_votes_with_party: 0,
+        independents_average_votes_with_party: 0,
+        members_who_often_do_not_vote_with_their_party: [],
+        members_who_often_do_vote_with_their_party: [],
+        members_who_missed_the_most_votes: [],
+        members_who_missed_the_least_votes: [],
+      }
 //Array de miembros
 var miembros = data.results[0].members;
 //Funcion que crea lista de miembros por partido
@@ -74,3 +87,17 @@ asignarPromedioDeVotosPorPartido("R");
 asignarPromedioDeVotosPorPartido("I");
 
 console.log(JSON.stringify(statistics));
+
+function crearListaNombrePorcentajePorPartido(partido){
+  var miembrosPartido = crearListaPorPartido(partido);
+  var listaNombrePorcentaje = [];
+  
+  miembrosPartido.forEach(miembro => {
+    var miembroNombrePorcentaje = {nombre : "",porcentajeVotos : 0};
+    miembroNombrePorcentaje.nombre = miembro.first_name+" "+miembro.;
+    miembroNombrePorcentaje.porcentajeVotos = miembro.votes_with_party_pct;
+    listaNombrePorcentaje.push(miembroNombrePorcentaje);
+  })
+  return listaNombrePorcentaje
+}
+console.log(crearListaNombrePorcentajePorPartido("I"));
