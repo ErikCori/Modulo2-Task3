@@ -94,10 +94,89 @@ function crearListaNombrePorcentajePorPartido(partido){
   
   miembrosPartido.forEach(miembro => {
     var miembroNombrePorcentaje = {nombre : "",porcentajeVotos : 0};
-    miembroNombrePorcentaje.nombre = miembro.first_name+" "+miembro.;
+		if(miembro.middle_name == null){
+			miembroNombrePorcentaje.nombre = miembro.first_name+" "+miembro.last_name;
+		}else{
+			miembroNombrePorcentaje.nombre = miembro.first_name+" "+miembro.middle_name+" "+miembro.last_name;		
+		}
     miembroNombrePorcentaje.porcentajeVotos = miembro.votes_with_party_pct;
     listaNombrePorcentaje.push(miembroNombrePorcentaje);
   })
   return listaNombrePorcentaje
 }
-console.log(crearListaNombrePorcentajePorPartido("I"));
+//Ordenamiento Descendente
+function ordenarListaPorPorcentajeDescendente(lista){
+	lista.sort(function(unElemento, otroElemento){
+		if(unElemento.porcentajeVotos > otroElemento.porcentajeVotos){
+			return -1;
+		}
+		if(unElemento.porcentajeVotos < otroElemento.porcentajeVotos){
+			return 1;
+		}
+		return 0;
+	})
+}
+//Ordenamiento Ascendente
+function ordenarListaPorPorcentajeAscendente(lista){
+	lista.sort(function(unElemento, otroElemento){
+		if(unElemento.porcentajeVotos > otroElemento.porcentajeVotos){
+			return 1;
+		}
+		if(unElemento.porcentajeVotos < otroElemento.porcentajeVotos){
+			return -1;
+		}
+		return 0;
+	})
+}
+var independientes = crearListaNombrePorcentajePorPartido("R");
+ordenarListaPorPorcentajeDescendente(independientes);
+console.log(independientes);	
+
+function miembrosQueMenosVotanConSuPartido(partido){
+	var miembrosPartido = crearListaNombrePorcentajePorPartido(partido);
+	var cantidadMiembros = miembrosPartido.length;
+	ordenarListaPorPorcentajeDescendente(miembrosPartido);
+	var peoresVotantes = [];
+	
+	while((peoresVotantes.length/cantidadMiembros)<0.1){
+		var menor = miembrosPartido.pop();
+		var menoresRepetidos = [];
+		menoresRepetidos = miembrosPartido.filter(miembro => miembro.porcentajeVotos == menor.porcentajeVotos);
+		peoresVotantes.push(menor);
+		peoresVotantes.concat(menoresRepetidos);
+	}
+	ordenarListaPorPorcentajeDescendente(peoresVotantes);
+	return peoresVotantes;
+}
+function miembrosQueMasVotanConSuPartido(partido){
+	var miembrosPartido = crearListaNombrePorcentajePorPartido(partido);
+	var cantidadMiembros = miembrosPartido.length;
+	ordenarListaPorPorcentajeAscendente(miembrosPartido);
+	var mejoresVotantes = [];
+	
+	while((mejoresVotantes.length/cantidadMiembros)< 0.1){
+		var mayor = miembrosPartido.pop();
+		var mayoresRepetidos = [];
+		mayoresRepetidos = miembrosPartido.filter(miembro => miembro.porcentajeVotos == mayor.porcentajeVotos);
+		mejoresVotantes.push(mayor);
+		mejoresVotantes.concat(mayoresRepetidos);
+	}
+	ordenarListaPorPorcentajeDescendente(mejoresVotantes);
+	return mejoresVotantes;
+}
+
+var peoresRepublicanos = miembrosQueMenosVotanConSuPartido("R");
+var peoresDemocratas = miembrosQueMenosVotanConSuPartido("D");
+var peoresIndependientes = miembrosQueMenosVotanConSuPartido("I");
+var peoresVotantes = peoresDemocratas.concat(peoresRepublicanos, peoresIndependientes);
+var mejoresRepublicanos = miembrosQueMasVotanConSuPartido("R");
+var mejoresDemocratas = miembrosQueMasVotanConSuPartido("D");
+var mejoresIndependientes = miembrosQueMasVotanConSuPartido("I");
+var mejoresVotantes = mejoresDemocratas.concat(mejoresRepublicanos, mejoresIndependientes);
+ordenarListaPorPorcentajeDescendente(mejoresVotantes);
+ordenarListaPorPorcentajeDescendente(peoresVotantes);
+
+statistics.members_who_missed_the_least_votes = mejoresDemocratas;
+statistics.members_who_missed_the_most_votes = peoresVotantes;
+
+console.log(JSON.stringify(statistics));
