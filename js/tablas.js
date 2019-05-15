@@ -5,7 +5,24 @@ function crearTablaEnHtml(members){
 	var contenidoTabla = crearContenidoTabla(members);
 	tabla.innerHTML = contenidoTabla;
 }
-
+function crearTablaAtGlance(lista){
+	var tabla = document.getElementById('table-atGlance');
+	tabla.innerHTML ="";
+	var contenidoTabla = crearContenidoTablaAtGlance(lista);
+	tabla.innerHTML = contenidoTabla;
+}
+function crearTablaLeast(lista){
+	var tabla = document.getElementById('table-least');
+	tabla.innerHTML ="";
+	var contenidoTabla = crearContenidoTablaAttendance(lista);
+	tabla.innerHTML = contenidoTabla;
+}
+function crearTablaMost(lista){
+	var tabla = document.getElementById('table-most');
+	tabla.innerHTML="";
+	var contenidoTabla = crearContenidoTablaAttendance(lista);
+	tabla.innerHTML = contenidoTabla;
+}
 
 
 //Funcion que crea el contenido de la tabla
@@ -32,17 +49,32 @@ function crearContenidoTabla(members){
 }
 
 //Funcion que crea el contenido de la tabla senate at glance
-function crearContenidoTablaSenateAtGlance(elementos){
+function crearContenidoTablaAtGlance(elementos){
   var tabla = '<thead class="thead"><tr><th>Party</th><th>Number of Reps</th><th>% Voted with Party</th></tr></thead>';
   tabla +='<tbody>';
   
   elementos.forEach(elemento =>{
     tabla += '<tr>';
-    table += '<td class="party">'+elemento.party+'</td>';
-    tabla += '<td class="numberOfReps">'+elemento.numberOfReps+'</td>';
-    tabla += '<td class="porcVotedWithParty>'+elemento.porcVotedWithParty+'</td>'
+    tabla += '<td class="party">'+elemento.id+'</td>';
+    tabla += '<td class="numberOfReps">'+elemento.cantMiembros+'</td>';
+    tabla += '<td class="porcVotedWithParty>'+elemento.promedioVotos+'</td>';
     tabla += '</tr>';
   })
   tabla += '</tbody>';
   return tabla;
+}
+//Funcion que crea el contenido de la tabla de asistencias
+function crearContenidoTablaAttendance(elementos){
+	var tabla = '<thead class="thead"><tr><th>Name</th><th>Number of Missed Votes</th><th>% Missed</th></tr></thead>';
+	tabla += '<tbody>';
+	
+	elementos.forEach(elemento =>{
+		tabla += '<tr>';
+		tabla += '<td class="name">'+elemento.nombre+'</td>';
+		tabla += '<td class="numberOfMissedVotes">'+elemento.votosPerdidos+'</td>';
+		tabla += '<td class="porcMissedVotes">'+elemento.porcVotosPerdidos+'</td>';
+		tabla += '</tr>';
+	})
+	tabla += '</tbody>';
+	return tabla
 }
