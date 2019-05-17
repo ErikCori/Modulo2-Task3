@@ -1,4 +1,4 @@
-var data =
+    var data =
 {
    "status":"OK",
    "copyright":" Copyright (c) 2019 Pro Publica Inc. All Rights Reserved.",
@@ -189,7 +189,7 @@ var data =
                  "phone": null,
                  "fax": null,
                  "state": "WY",
-                 "senate_class": "1",
+                 "senate_class": "1",   
                  "state_rank": "",
                  "lis_id": "S317"
                  ,"missed_votes_pct": 0.91,
