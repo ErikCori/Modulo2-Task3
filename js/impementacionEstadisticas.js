@@ -1,3 +1,5 @@
 crearTablaAtGlance(partidos);
-crearTablaLeast(statistics.members_who_missed_the_least_votes);
-crearTablaMost(statistics.members_who_missed_the_most_votes);
+crearTablaLeastAttendance(statistics.members_who_missed_the_most_votes);
+crearTablaMostAttendance(statistics.members_who_missed_the_least_votes);
+crearTablaLeastLoyalty(statistics.members_who_often_do_not_vote_with_their_party);
+crearTablaMostLoyalty(statistics.members_who_often_do_vote_with_their_party);

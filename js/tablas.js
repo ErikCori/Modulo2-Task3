@@ -11,20 +11,12 @@ function crearTablaAtGlance(lista){
 	var contenidoTabla = crearContenidoTablaAtGlance(lista);
 	tabla.innerHTML = contenidoTabla;
 }
-function crearTablaLeast(lista){
-	var tabla = document.getElementById('table-least');
+function crearTablaTop10(lista){
+	var tabla = document.getElementById('table-least-engaged');
 	tabla.innerHTML ="";
 	var contenidoTabla = crearContenidoTablaAttendance(lista);
 	tabla.innerHTML = contenidoTabla;
 }
-function crearTablaMost(lista){
-	var tabla = document.getElementById('table-most');
-	tabla.innerHTML="";
-	var contenidoTabla = crearContenidoTablaAttendance(lista);
-	tabla.innerHTML = contenidoTabla;
-}
-
-
 //Funcion que crea el contenido de la tabla
 function crearContenidoTabla(members){
 	var table = '<thead class="thead"><tr><th>Full name</th><th>Party</th><th>State</th><th>Seniority</th><th>Percentage of votes whith party</th></tr></thead>';
@@ -50,18 +42,18 @@ function crearContenidoTabla(members){
 
 //Funcion que crea el contenido de la tabla senate at glance
 function crearContenidoTablaAtGlance(elementos){
-  var tabla = '<thead class="thead"><tr><th>Party</th><th>Number of Reps</th><th>% Voted with Party</th></tr></thead>';
-  tabla +='<tbody>';
-  
-  elementos.forEach(elemento =>{
-    tabla += '<tr>';
-    tabla += '<td class="party">'+elemento.id+'</td>';
-    tabla += '<td class="numberOfReps">'+elemento.cantMiembros+'</td>';
-    tabla += '<td class="porcVotedWithParty>'+elemento.promedioVotos+'</td>';
-    tabla += '</tr>';
-  })
-  tabla += '</tbody>';
-  return tabla;
+  var tabla = '<thead class="thead"><tr><th>Party</th><th>Number of Reps</th><th>% Votes with Party</th></tr></thead>';
+	tabla += '<tbody>';
+	
+	elementos.forEach(elemento =>{
+		tabla += '<tr>';
+		tabla += '<td class="party">'+elemento.id+'</td>';
+		tabla += '<td class="numberOfReps">'+elemento.cantMiembros+'</td>';
+		tabla += '<td class="porcVotesWithParty">'+elemento.promedioVotos+'</td>';
+		tabla += '</tr>';
+	})
+	tabla += '</tbody>';
+	return tabla
 }
 //Funcion que crea el contenido de la tabla de asistencias
 function crearContenidoTablaAttendance(elementos){
@@ -73,6 +65,20 @@ function crearContenidoTablaAttendance(elementos){
 		tabla += '<td class="name">'+elemento.nombre+'</td>';
 		tabla += '<td class="numberOfMissedVotes">'+elemento.votosPerdidos+'</td>';
 		tabla += '<td class="porcMissedVotes">'+elemento.porcVotosPerdidos+'</td>';
+		tabla += '</tr>';
+	})
+	tabla += '</tbody>';
+	return tabla
+}
+function crearContenidoTablaLoyalty(elementos){
+	var tabla = '<thead class="thead"><tr><th>Name</th><th>Number of Party Votes</th><th>% Party Votes</th></tr></thead>';
+	tabla += '<tbody>';
+	
+	elementos.forEach(elemento =>{
+		tabla += '<tr>';
+		tabla += '<td class="name">'+elemento.nombre+'</td>';
+		tabla += '<td class="numberOfPartyVotes">'+elemento.votosPerdidos+'</td>';
+		tabla += '<td class="porcPartyVotes">'+elemento.porcVotosPerdidos+'</td>';
 		tabla += '</tr>';
 	})
 	tabla += '</tbody>';

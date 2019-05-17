@@ -135,7 +135,6 @@ function miembrosConMenosVotosConPartido() {
 		peoresVotantes.push(datosImportantes[i]);
 		i++;
 	}
-	ordenarListaDescendente(peoresVotantes, "votosConPartido");
 	return peoresVotantes;
 }
 function miembrosConMenosVotosPerdidos() {
@@ -149,7 +148,6 @@ function miembrosConMenosVotosPerdidos() {
 		conMenosVotosPerdidos.push(datosImportantes[i]);
 		i++;
 	}
-	ordenarListaDescendente(conMenosVotosPerdidos, "votosPerdidos");
 	return conMenosVotosPerdidos;
 }
 //Funcion para mayores
